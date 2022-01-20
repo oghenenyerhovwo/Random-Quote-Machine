@@ -3,22 +3,37 @@ import colors from "./data/color";
 
 
 function App() {
-  const [color, setColor] = useState("white")
+  const [color, setColor] = useState("#333")
   useEffect(() => {
-    const n = Math. floor(Math. random() * 15)
+    const n = Math.floor(Math. random() * 15)
     setColor(colors[n])
   }, [])
 
   return (
     <div
       style ={{
-        display: "inline-block",
+        fontFamily: '"Raleway", sans-serif',
+        fontWeight: 400,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         height: "100vh",
-        width: "100%",
         background: color,
       }}
     >
-      Good
+      <div
+        style ={{
+          borderRadius: "3px",
+          position: "relative",
+          width: "450px",
+          padding: "40px 50px",
+          display: "table",
+          backgroundColor:" #fff",
+          zIndex: 2,
+        }}
+      >
+        years 
+      </div>
     </div>
   );
 }
