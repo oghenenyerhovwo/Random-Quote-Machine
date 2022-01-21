@@ -32,7 +32,38 @@ function App() {
           zIndex: 2,
         }}
       >
-        years 
+        <div>
+          <h1 style={{color: color, fontSize: "3rem"}} >
+            <i class="fa fa-quote-left" aria-hidden="true"></i>
+            {" "}
+
+          </h1>
+        </div> 
+        <div>
+          <div
+            style={{
+              display: "inline-block"
+            }}
+          >
+            <button
+              style={{borderRadius: "3px", fontSize: "0.9rem", background: color, border: "none", padding: "10px", color: "#fff" }}
+            >
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div
+            style={{
+              display: "inline-block",
+              float: "right",
+            }}
+          >
+            <button
+              style={{borderRadius: "3px", background: color, border: "none", padding: "10px", color: "#fff" }}
+            >
+              New Quote
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
