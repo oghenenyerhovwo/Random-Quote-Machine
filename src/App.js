@@ -27,7 +27,7 @@ const setQoutesArray = () => {
 }
 
   useEffect(() => {
-    setQoutesArray() 
+    setQoutesArray() //eslint-disable-next-line
   }, [])
 
   
@@ -73,7 +73,7 @@ const setQoutesArray = () => {
         }}
       >
         <div style={{marginBottom: "90px"}}>
-          <h1 style={{color: color, fontSize: "3rem"}} >
+          <h1 style={{color: color, fontSize: "2.4rem"}} >
             <i className="fa fa-quote-left" aria-hidden="true"></i>
             {" "}
             {quotes && quote.quote}
