@@ -53,7 +53,7 @@ const setQoutesArray = () => {
     const tweetText = `${quote.quote} - ${quote.author}`
     axios
       .post(
-        "http://localhost:5000/api/tweet",
+        "https://me-twitter-bot.herokuapp.com/api/tweet",
         {text: tweetText}
       )
   }
