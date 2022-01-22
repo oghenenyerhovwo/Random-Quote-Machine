@@ -49,6 +49,15 @@ const setQoutesArray = () => {
     }
   }
 
+  const postTweet = () => {
+    const tweetText = `${quote.quote} - ${quote.author}`
+    axios
+      .post(
+        "https://me-twitter-bot.herokuapp.com/api/tweet",
+        tweetText
+      )
+  }
+
   return (
     <div
       style ={{
@@ -89,6 +98,7 @@ const setQoutesArray = () => {
             }}
           >
             <button
+              onClick={postTweet}
               style={{borderRadius: "3px", fontSize: "1.2rem", background: color, border: "none", padding: "10px", color: "#fff" }}
             >
               <i className="fa fa-twitter" aria-hidden="true"></i>
