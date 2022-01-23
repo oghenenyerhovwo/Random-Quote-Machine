@@ -28,7 +28,7 @@ const setNewColor = () => {
     setTimeout(() => {
       setColor(colors[n])
       setShowBack(true)
-    }, 350);
+    }, 650);
     
 
   }
@@ -56,7 +56,7 @@ const setQuotesArray = () => {
       const q_index = Math.floor(Math.random() * quotes.length)
       setTimeout(() => {
         setQuote(quotes[q_index])
-      }, 350);
+      }, 650);
     } else {
       setQuotesArray()
     }
@@ -76,7 +76,7 @@ const setQuotesArray = () => {
     
   }
 
-  const duration = 350;
+  const duration = 650;
 
 const defaultStyle = {
     fontFamily: '"Raleway", sans-serif',
