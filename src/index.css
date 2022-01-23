@@ -7,3 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button:hover{
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+button a{
+  color: #fff;
+}
+
+.disabled{
+  cursor: default;
+  opacity: 1;
+}

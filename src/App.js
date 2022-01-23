@@ -9,12 +9,16 @@ function App() {
   const [quotes, setQuotes] = useState([])
   const [quote, setQuote] = useState({})
 
+  const tweet = '"' + quote.quote + '" ' + quote.author
+  const postLink = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' +
+  encodeURIComponent(tweet)
+
 const setNewColor = () => {
     const n = Math.floor(Math.random() * 15)
     setColor(colors[n])
   }
 
-const setQoutesArray = () => {
+const setQuotesArray = () => {
   axios
       .get(
           "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json",
@@ -27,7 +31,7 @@ const setQoutesArray = () => {
 }
 
   useEffect(() => {
-    setQoutesArray() //eslint-disable-next-line
+    setQuotesArray() //eslint-disable-next-line
   }, [])
 
   
@@ -37,7 +41,7 @@ const setQoutesArray = () => {
       const q_index = Math.floor(Math.random() * quotes.length)
       setQuote(quotes[q_index])
     } else {
-      setQoutesArray()
+      setQuotesArray()
     }
   }
 
@@ -47,15 +51,6 @@ const setQoutesArray = () => {
     if (changeColor){
       setNewColor()
     }
-  }
-
-  const postTweet = () => {
-    const tweetText = `${quote.quote} - ${quote.author}`
-    axios
-      .post(
-        "https://me-twitter-bot.herokuapp.com/api/tweet",
-        {text: tweetText}
-      )
   }
 
   return (
@@ -97,12 +92,14 @@ const setQoutesArray = () => {
               display: "inline-block"
             }}
           >
-            <button
-              onClick={postTweet}
-              style={{borderRadius: "3px", fontSize: "1.2rem", background: color, border: "none", padding: "10px", color: "#fff" }}
-            >
-              <i className="fa fa-twitter" aria-hidden="true"></i>
-            </button>
+            <>
+              
+              <a  
+                className={quote.quote ? "" : "disabled"} 
+                style={{borderRadius: "3px", fontSize: "1.2rem", background: color, border: "none", padding: "10px", color: "#fff" }}
+                href={quote.quote ? postLink : "#" }
+              ><i className="fa fa-twitter" aria-hidden="true"></i></a>
+            </>
           </div>
           <div
             style={{
