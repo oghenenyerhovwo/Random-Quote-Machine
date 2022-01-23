@@ -1,5 +1,8 @@
 import axios from 'axios';
+import { Transition } from 'react-transition-group';
 import { useEffect, useState } from "react";
+import classNames from 'classnames';
+import styles from './App.module.css';
 import colors from "./data/color";
 
 
@@ -7,7 +10,13 @@ function App() {
   const [color, setColor] = useState("#333")
   const [changeColor, setChangeColor] = useState(false)
   const [quotes, setQuotes] = useState([])
+  const [showBack, setShowBack] = useState(false)
   const [quote, setQuote] = useState({})
+
+  const [animate, setAnimate] = useState(false);
+
+  const handleAnimate = () => setAnimate(!animate);
+
 
   const tweet = '"' + quote.quote + '" ' + quote.author
   const postLink = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' +
@@ -15,7 +24,13 @@ function App() {
 
 const setNewColor = () => {
     const n = Math.floor(Math.random() * 15)
-    setColor(colors[n])
+    setShowBack(false)
+    setTimeout(() => {
+      setColor(colors[n])
+      setShowBack(true)
+    }, 350);
+    
+
   }
 
 const setQuotesArray = () => {
@@ -39,7 +54,9 @@ const setQuotesArray = () => {
   const getQuote = () => {
     if(quotes.length > 1){
       const q_index = Math.floor(Math.random() * quotes.length)
-      setQuote(quotes[q_index])
+      setTimeout(() => {
+        setQuote(quotes[q_index])
+      }, 350);
     } else {
       setQuotesArray()
     }
@@ -49,6 +66,7 @@ const setQuotesArray = () => {
     if (quotes.length > 1) {
       getQuote()
       setChangeColor(true)
+      handleAnimate()
       if (changeColor){
         setNewColor()
       }
@@ -58,18 +76,35 @@ const setQuotesArray = () => {
     
   }
 
+  const duration = 350;
+
+const defaultStyle = {
+    fontFamily: '"Raleway", sans-serif',
+    fontWeight: 400,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    opacity: 0.4,
+    background: color,
+    transition: `opacity ${duration}ms ease-in-out`,
+}
+
+const transitionStyles = {
+  entering: { opacity: 1 },
+  entered:  { opacity: 1 },
+  exiting:  { opacity: 0.4 },
+  exited:  { opacity: 0.4 },
+};
+  
   return (
-    <div
-      style ={{
-        fontFamily: '"Raleway", sans-serif',
-        fontWeight: 400,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        background: color,
-      }}
-    >
+    <Transition in={showBack} timeout={duration}>
+      {state => (
+        <div style={{
+          ...defaultStyle,
+          ...transitionStyles[state]
+        }}>
+
       <div
         style ={{
           borderRadius: "3px",
@@ -82,10 +117,16 @@ const setQuotesArray = () => {
         }}
       >
         <div style={{marginBottom: "90px"}}>
-          <h1 style={{color: color, fontSize: "2.4rem"}} >
+          <h1 style={{textAlign: "center",color: color, fontSize: "2.4rem"}} >
             <i className="fa fa-quote-left" aria-hidden="true"></i>
             {" "}
-            {quote.quote}
+            <span 
+                className={classNames(
+                  styles.animate,
+                  animate && styles.grow
+                )}>
+                {quote.quote} 
+            </span>
           </h1>
           <div>
             <div style={{display: "inline-block",color: color, float: "right", fontSize: "1.2rem"}}>-{quotes && quote.author}</div>
@@ -121,7 +162,9 @@ const setQuotesArray = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    )}
+  </Transition>
   );
 }
 
