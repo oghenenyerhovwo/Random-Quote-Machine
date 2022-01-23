@@ -46,11 +46,16 @@ const setQuotesArray = () => {
   }
 
   const handleClick = () => {
-    getQuote()
-    setChangeColor(true)
-    if (changeColor){
-      setNewColor()
+    if (quotes.length > 1) {
+      getQuote()
+      setChangeColor(true)
+      if (changeColor){
+        setNewColor()
+      }
+    } else {
+      alert("Please reload page")
     }
+    
   }
 
   return (
@@ -80,7 +85,7 @@ const setQuotesArray = () => {
           <h1 style={{color: color, fontSize: "2.4rem"}} >
             <i className="fa fa-quote-left" aria-hidden="true"></i>
             {" "}
-            {quotes && quote.quote}
+            {quote.quote}
           </h1>
           <div>
             <div style={{display: "inline-block",color: color, float: "right", fontSize: "1.2rem"}}>-{quotes && quote.author}</div>
